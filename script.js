@@ -10,7 +10,7 @@ let timer = 60;
 let intervalId;
 let juegoActivo = false;
 
-let moviminetosEL = document.getElementById("movimientos");
+let movimientosEl = document.getElementById("movimientos");
 let aciertosEl = document.getElementById("puntaje");
 let timerEl = document.getElementById("tiempo-restante");
 
@@ -59,21 +59,30 @@ function desbloquearTarjetas() {
 }
 
 function destapar(id) {
+  var carta = document.getElementById(id);
+
+  if (carta.classList.contains("encontrada") || carta.disabled) {
+    return;
+  }
+
   tarjetasDestapadas++;
 
+  if (id == null) {
+    return null;
+  }
   if (tarjetasDestapadas === 1) {
-    carta1 = document.getElementById(id);
+    carta1 = carta;
     resultado1 = number[id];
     carta1.innerHTML = `<img src="./imagenes/${resultado1}.jpg" alt="">`;
-    carta1.disable = true;
+    carta1.disabled = true;
   } else if (tarjetasDestapadas === 2) {
-    carta2 = document.getElementById(id);
+    carta2 = carta;
     resultado2 = number[id];
     carta2.innerHTML = `<img src="./imagenes/${resultado2}.jpg">`;
-    carta2.disable = true;
+    carta2.disabled = true;
 
     movimientos++;
-    moviminetosEL.innerHTML = movimientos;
+    movimientosEl.innerHTML = movimientos;
 
     if (resultado1 === resultado2) {
       tarjetasDestapadas = 0;
@@ -112,8 +121,8 @@ function destapar(id) {
       setTimeout(() => {
         carta1.innerHTML = "";
         carta2.innerHTML = "";
-        carta1.disable = false;
-        carta2.disable = false;
+        carta1.disabled = false;
+        carta2.disabled = false;
         tarjetasDestapadas = 0;
         desbloquearTarjetas();
       }, 500);
