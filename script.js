@@ -159,7 +159,7 @@ function mostrar() {
 
   aciertos = 0;
   movimientos = 0;
-  moviminetosEL.innerHTML = movimientos;
+  movimientosEl.innerHTML = movimientos;
   aciertosEl.innerHTML = aciertos;
 }
 
